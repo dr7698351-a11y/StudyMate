@@ -1,0 +1,380 @@
+<!doctype html><html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>StudyMate HSC</title><style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Noto Sans Bengali",sans-serif;background:#f4f7fb;color:#172033}header{height:64px;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 18px;position:sticky;top:0;z-index:3;box-shadow:0 2px 12px #0001}.logo{font-weight:800;font-size:20px}header button{border:0;background:#eef2f7;border-radius:12px;padding:10px;width:48px;height:48px;display:inline-flex;align-items:center;justify-content:center;font-size:22px;margin-left:6px}main{max-width:760px;margin:auto;padding:20px 16px 90px}.page{display:none}.page.active{display:block}.hero{padding:22px;border-radius:20px;background:linear-gradient(135deg,#273e9b,#1bb7e9);color:white}.hero h1{margin:0 0 7px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}.stats div{background:#fff;border-radius:16px;padding:14px;text-align:center;box-shadow:0 4px 15px #0001}.stats b{display:block;font-size:24px}.stats small{color:#687386}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.card{border:0;background:#fff;border-radius:18px;padding:24px 10px;font-size:30px;box-shadow:0 4px 15px #0001}.card span{display:block;font-size:15px;font-weight:700;margin-top:8px}.list{display:grid;gap:12px}.list button{border:0;text-align:left;background:#fff;border-radius:16px;padding:18px;font-size:17px;font-weight:700;box-shadow:0 4px 15px #0001}.list small{float:right;color:#7b8493;font-weight:400}.paper{margin-bottom:20px}.paper h2{font-size:18px;margin:14px 0 10px}.chapter{display:flex;align-items:center;gap:10px;width:100%;border:0;text-align:left;background:#fff;border-radius:15px;padding:14px;margin:8px 0;box-shadow:0 4px 15px #0001}.chapter span{font-size:12px;color:#667085;min-width:65px}.chapter b{flex:1;font-size:15px}.chapter em{font-style:normal;font-size:24px;color:#7c83a1}.back{border:0;background:#eef2f7;padding:9px 13px;border-radius:10px;margin-bottom:8px}.sub{color:#6b7280;margin-top:-8px}.note{background:#fff;padding:20px;border-radius:18px;line-height:1.7}.editor{background:#fff;border-radius:18px;padding:12px;box-shadow:0 4px 15px #0001}.save{font-size:12px;color:#667085;padding:4px 4px 10px}textarea{width:100%;min-height:430px;border:0;outline:0;resize:vertical;font:16px/1.7 system-ui,"Noto Sans Bengali",sans-serif;padding:8px;background:transparent;color:inherit}.quiz{background:#fff;border-radius:18px;padding:20px}.option{display:block;width:100%;margin:10px 0;padding:13px;border:1px solid #dbe1ea;background:#fff;border-radius:12px;text-align:left}.option.correct{background:#dff7e7}.option.wrong{background:#ffe1e1}.quiz>#next,.timer button{border:0;background:#273e9b;color:#fff;padding:12px 18px;border-radius:12px;margin:5px}.timer{text-align:center;background:#fff;padding:30px;border-radius:20px}.timer #clock{font-size:60px;font-weight:800;margin:10px}nav{position:fixed;bottom:0;left:0;right:0;height:68px;background:#fff;display:flex;justify-content:center;gap:8px;box-shadow:0 -2px 15px #0001;z-index:5}nav button{flex:1;max-width:150px;border:0;background:none;font-size:20px}nav span{display:block;font-size:11px;color:#667085}.dark{background:#111827;color:#f4f7fb}.dark header,.dark .stats div,.dark .card,.dark .list button,.dark .chapter,.dark .note,.dark .quiz,.dark .timer,.dark .editor{background:#1f2937;color:#f4f7fb}.dark .option{background:#273244;color:white;border-color:#3b4658}.dark .back{background:#273244;color:#fff}.dark textarea{color:#fff}@media(min-width:700px){nav{border-radius:20px;left:50%;transform:translateX(-50%);max-width:650px;margin-bottom:10px}}
+
+.photoBox{background:#fff;border-radius:18px;padding:18px;margin-top:14px;box-shadow:0 4px 15px #00000008}
+.photoHead{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.photoBox h2{margin:0 0 5px}.photoBox p{color:#687386}
+.photoBtn{display:inline-block;background:#5b5be8;color:#fff;padding:12px 16px;border-radius:12px;font-weight:700;cursor:pointer}
+.photoSettings,.settingsBtn,.viewerSettings{border:0;background:#eef2f7;border-radius:12px;padding:10px 12px;font-size:20px;cursor:pointer}
+.photoGallery{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px}
+.photoCard{position:relative;background:#f1f3f7;border-radius:14px;overflow:hidden;cursor:pointer}
+.photoCard img{width:100%;height:260px;display:block;object-fit:cover}
+.photoCard .gear{position:absolute;right:7px;top:7px;border:0;border-radius:10px;width:38px;height:38px;background:#fff;font-weight:800;font-size:18px;cursor:pointer;box-shadow:0 2px 8px #0002}
+.dark .photoBox{background:#1f2937}.dark .photoBox p{color:#b8c0cc}
+.dark .photoSettings,.dark .settingsBtn,.dark .viewerSettings{background:#273244;color:#fff}
+.modal{position:fixed;inset:0;background:#0008;display:none;align-items:center;justify-content:center;z-index:20;padding:20px}
+.modal.show{display:flex}
+.modalCard{width:min(92vw,520px);background:#fff;color:#172033;border-radius:20px;padding:20px;box-shadow:0 10px 40px #0006}
+.modalCard h2{margin-top:0}
+.modalCard button{border:0;border-radius:12px;padding:12px 16px;margin:6px 4px 0 0;font-weight:700}
+.danger{background:#e53935!important;color:#fff}
+.viewer{position:fixed;inset:0;background:#000;display:none;align-items:center;justify-content:center;z-index:30}
+.viewer.show{display:flex}
+.viewer img{max-width:100vw;max-height:100vh;width:auto;height:auto;object-fit:contain}
+.viewerTop{position:absolute;top:14px;right:14px;display:flex;gap:8px;z-index:31}
+.viewerClose{border:0;background:#fff;color:#111;border-radius:12px;padding:10px 14px;font-size:20px;cursor:pointer}
+.viewerMenu{position:absolute;top:64px;right:14px;background:#fff;border-radius:14px;padding:8px;display:none;z-index:32;box-shadow:0 8px 30px #0006}
+.viewerMenu.show{display:block}.viewerMenu button{border:0;background:#fff;padding:12px 14px;border-radius:10px;font-weight:700}
+.dark .modalCard{background:#1f2937;color:#f4f7fb}
+.photoCaption{width:100%;border:0;border-top:1px solid #e5e7eb;outline:0;padding:10px 12px;font:14px/1.5 system-ui,"Noto Sans Bengali",sans-serif;background:transparent;color:inherit;resize:none}.photoCard .photoCaption::placeholder{color:#98a2b3}.dark .photoCaption{border-color:#3b4658;color:#fff}
+.quickNoteBox{background:#fff;border-radius:18px;padding:16px;box-shadow:0 4px 15px #0001;margin-bottom:16px}
+.quickTitle{width:100%;border:1px solid #dbe1ea;border-radius:12px;padding:12px;font:700 16px system-ui,"Noto Sans Bengali",sans-serif;margin-bottom:10px;background:transparent;color:inherit}
+.quickArea{width:100%;min-height:220px;border:1px solid #dbe1ea;border-radius:12px;padding:12px;font:16px/1.7 system-ui,"Noto Sans Bengali",sans-serif;margin-bottom:12px}
+.saveQuickBtn{border:0;background:#273e9b;color:#fff;padding:12px 18px;border-radius:12px;font-weight:700;margin:4px 0 12px}.quickNotesList{display:grid;gap:12px}.quickSavedCard{background:#fff;border-radius:16px;padding:16px;box-shadow:0 4px 15px #0001}.quickSavedCard h3{margin:0 0 8px}.quickSavedCard p{white-space:pre-wrap;line-height:1.65;margin:0 0 10px}.quickSavedCard .miniPhotos{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.quickSavedCard img{width:100%;height:100px;object-fit:cover;border-radius:10px}
+.dark .quickNoteBox,.dark .quickSavedCard{background:#1f2937;color:#f4f7fb}.dark .quickTitle,.dark .quickArea{border-color:#3b4658;color:#fff}
+.dark .quickTitle::placeholder,.dark .quickArea::placeholder{color:#aeb8c7}
+.langRow{display:flex;gap:10px;margin-top:12px}
+.langRow button{flex:1;border:1px solid #dbe1ea;background:#fff;color:#172033;border-radius:12px;padding:12px;font-weight:700}
+.langRow button.active{background:#273e9b;color:#fff;border-color:#273e9b}
+.dark .langRow button{background:#273244;color:#fff;border-color:#3b4658}
+
+/* v7 improvements */
+.progressBox,.plannerBox,.backupBox{background:#fff;border-radius:18px;padding:16px;margin:14px 0;box-shadow:0 4px 15px #0001}
+.progressBar{height:10px;background:#e7ebf2;border-radius:99px;overflow:hidden;margin:8px 0}.progressFill{height:100%;width:0;background:#273e9b;border-radius:99px;transition:width .3s}
+.homeActions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.homeActions button,.plannerBtn,.backupBtn{border:0;border-radius:13px;padding:13px;background:#eef2f7;font-weight:700}
+.plannerDate{display:flex;align-items:center;gap:10px;margin:10px 0 14px}.plannerDate input{flex:1;border:1px solid #dbe1ea;border-radius:10px;padding:10px;background:transparent;color:inherit;font:inherit}.plannerDay{font-weight:700;margin:0 0 10px}.plannerItem{display:flex;gap:8px;align-items:center;margin:8px 0}.plannerItem input[type=text]{flex:1;border:1px solid #dbe1ea;border-radius:10px;padding:10px;background:transparent;color:inherit}
+.completeBtn{border:0;border-radius:12px;padding:11px 14px;background:#eef2f7;font-weight:700;margin:8px 0}.completeBtn.done{background:#dff7e7}
+.dark .progressBox,.dark .plannerBox,.dark .backupBox,.dark .stats div,.dark .card,.dark .list button,.dark .editor,.dark .photoBox,.dark .quiz,.dark .timer,.dark .quickNoteBox,.dark .quickSavedCard{background:#202634;color:#f3f4f6}.dark .progressBar{background:#3a4150}.dark .homeActions button,.dark .plannerBtn,.dark .backupBtn,.dark .completeBtn{background:#303849;color:#fff}.dark .plannerItem input[type=text],.dark .plannerDate input{border-color:#465064}.todayPlan{margin:14px 0}.todayPlanBox{background:#fff;border-radius:18px;padding:16px;box-shadow:0 4px 15px #0001}.todayTask{display:flex;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid #e5e8ee}.todayTask:last-child{border-bottom:0}.todayTask.done span{text-decoration:line-through;opacity:.6}.emptyPlan{opacity:.65}.dark .todayPlanBox{background:#202634;color:#f3f4f6}.dark .todayTask{border-color:#3b4658}
+
+.updateBox{margin-top:16px;padding:14px;border-radius:16px;background:#eef3ff;border:1px solid #dbe5ff}
+.updateBox b{display:block;margin-bottom:6px}.updateStatus{font-size:14px;opacity:.8;margin:6px 0 10px}
+.updateBtn{border:0;border-radius:12px;padding:11px 15px;font-weight:700;background:#4f46e5;color:#fff;cursor:pointer}
+.updateBtn.secondary{background:#e8edf7;color:#172033}
+.updateVersion{font-size:12px;opacity:.65;margin-top:8px}
+.dark .updateBox{background:#273244;border-color:#3b4658}
+.dark .updateBtn.secondary{background:#374151;color:#fff}
+</style></head><body><header><div class="logo">📚 StudyMate</div><div><button class="settingsBtn" onclick="openSettings()" aria-label="Settings">⚙️</button><button id="theme">🌙</button></div></header><main>
+<section id="home" class="page active"><div class="hero"><h1 data-i18n="study">আজ কী পড়বে? 👋</h1><p data-i18n="desc">বাংলাদেশ HSC পড়াশোনার জন্য তোমার নিজের StudyMate.</p></div>
+<div class="stats"><div><b id="studyMinutes">0</b><small data-i18n="minutes">মিনিট পড়া</small></div><div><b id="quizScore">0</b><small> Quiz Score</small></div><div><b id="completedCount">0</b><small data-i18n="completed">সম্পন্ন</small></div></div>
+<div class="progressBox"><b>📊 Study Progress</b><div class="progressBar"><div id="progressFill" class="progressFill"></div></div><small id="progressText">0% completed</small></div>
+<div class="homeActions"><button onclick="show('planner')">📅 Daily Planner</button><button onclick="show('backup')">💾 Backup & Restore</button></div><div class="todayPlan"><div class="todayPlanBox"><b>📅 আজকের পড়ার কাজ</b><div id="homePlannerList" class="todayPlanList"></div></div></div>
+<h2 data-i18n="quickStudy">Quick Study</h2><div class="grid"><button class="card" onclick="show('subjects')">📚<span data-i18n="subjects">Subjects</span></button><button class="card" onclick="show('quiz')">📝<span data-i18n="quiz">MCQ Quiz</span></button><button class="card" onclick="show('timer')">⏱️<span data-i18n="timer">Study Timer</span></button><button class="card" onclick="show('notes')">📖<span data-i18n="notes">Quick Notes</span></button></div></section>
+<section id="subjects" class="page"><h1>📚 Subjects</h1><div class="list"><button onclick="openSubject('পদার্থবিজ্ঞান')">⚡ পদার্থবিজ্ঞান <small>১ম + ২য় পত্র</small></button><button onclick="openSubject('জীববিজ্ঞান')">🧬 জীববিজ্ঞান <small>১ম + ২য় পত্র</small></button><button onclick="openSubject('রসায়ন')">🧪 রসায়ন <small>১ম + ২য় পত্র</small></button><button onclick="openSubject('উচ্চতর গণিত')">📐 উচ্চতর গণিত <small>১ম + ২য় পত্র</small></button><button onclick="openSubject('বাংলা')">📚 বাংলা <small>১ম + ২য় পত্র</small></button><button onclick="openSubject('ইংরেজি')">🔤 ইংরেজি <small>১ম + ২য় পত্র</small></button><button onclick="openSubject('আইসিটি')">💻 আইসিটি <small>১ম + ২য় পত্র</small></button></div></section>
+<section id="papers" class="page"><button class="back" onclick="show('subjects')">← Subjects</button><h1 id="paperTitle">Subject</h1><div id="paperList"></div></section>
+<section id="editor" class="page"><button class="back" onclick="show('papers')">← Chapters</button><h1 id="chapterTitle">Chapter</h1><p id="chapterSub" class="sub"></p><button id="completeChapterBtn" class="completeBtn" onclick="toggleChapterComplete()">☐ Mark as Complete</button><div class="editor"><div class="save" id="saved">নিজের নোট লিখুন</div><textarea id="noteArea" placeholder="এই অধ্যায়ের নিজের নোট, সূত্র, গুরুত্বপূর্ণ প্রশ্ন ইত্যাদি এখানে লিখো..."></textarea></div><div class="photoBox"><div class="photoHead"><div><h2>🖼️ অধ্যায়ের ছবি</h2><p>এই অধ্যায়ের জন্য Gallery থেকে ছবি যোগ করতে পারো। ছবিতে চাপ দিলে বড় করে দেখা যাবে।</p></div><button class="photoSettings" onclick="openSettings()" aria-label="Photo settings">⚙️</button></div><label class="photoBtn">📷 ছবি যোগ করো<input id="photoInput" type="file" accept="image/*" multiple hidden></label><div id="photoGallery" class="photoGallery"></div></div></section>
+<section id="notes" class="page">
+<h1>📖 Quick Notes</h1>
+<div class="quickNoteBox">
+  <div class="save" id="quickSaved">নিজের Quick Note লিখুন</div>
+  <input id="quickNoteTitle" class="quickTitle" placeholder="নোটের শিরোনাম লিখুন...">
+  <textarea id="quickNoteArea" class="quickArea" placeholder="এখানে যেকোনো বিষয়, সূত্র, গুরুত্বপূর্ণ প্রশ্ন বা মনে রাখার কথা লিখুন..."></textarea><br><button class="saveQuickBtn" id="saveQuickNote" onclick="saveQuickNote()">💾 Save Note</button>
+  <label class="photoBtn">📷 ছবি যোগ করো<input id="quickPhotoInput" type="file" accept="image/*" multiple hidden></label>
+  <div id="quickPhotoGallery" class="photoGallery"></div>
+</div>
+<div class="quickNotesList" id="quickNotesList"></div>
+</section>
+<section id="planner" class="page"><button class="back" onclick="show('home')">← Home</button><h1>📅 Daily Planner</h1><div class="plannerBox"><p>যে তারিখের জন্য পড়ার কাজ যোগ করতে চাও, তারিখ নির্বাচন করো।</p><div class="plannerDate"><span>📅</span><input id="plannerDate" type="date" onchange="changePlannerDate(this.value)"></div><p id="plannerDay" class="plannerDay"></p><div id="plannerList"></div><button class="plannerBtn" onclick="addPlannerItem()">＋ Add Task</button><button class="plannerBtn" onclick="clearPlanner()">🗑️ Clear</button></div></section>
+<section id="backup" class="page"><button class="back" onclick="show('home')">← Home</button><h1>💾 Backup & Restore</h1><div class="backupBox"><p>Notes, photos, Quick Notes, progress ও planner একসাথে backup করে রাখো।</p><button class="backupBtn" onclick="exportBackup()">⬇️ Export Backup</button><label class="backupBtn" style="display:inline-block;margin:6px 0;cursor:pointer">⬆️ Restore Backup<input type="file" accept="application/json" hidden onchange="importBackup(event)"></label><p class="sub">Backup ফাইলটি নিরাপদ জায়গায় রেখে দাও।</p></div></section>
+<section id="quiz" class="page"><h1>📝 MCQ Quiz</h1><div class="quiz"><p id="q"></p><div id="opts"></div><button id="next" onclick="nextQ()">Next →</button><p id="result"></p></div></section>
+<section id="timer" class="page"><h1>⏱️ Study Timer</h1><div class="timer"><div id="clock">25:00</div><button onclick="startTimer()">▶ Start</button><button onclick="pauseTimer()">⏸ Pause</button><button onclick="resetTimer()">↺ Reset</button></div></section></main>
+<nav><button onclick="show('home')">🏠<span data-i18n="home">Home</span></button><button onclick="show('subjects')">📚<span data-i18n="subjects">Subjects</span></button><button onclick="show('notes')">📖<span data-i18n="notes">Notes</span></button><button onclick="show('quiz')">📝<span data-i18n="quiz">Quiz</span></button><button onclick="show('timer')">⏱️<span data-i18n="timer">Timer</span></button></nav>
+<div id="settingsModal" class="modal" onclick="if(event.target===this)closeSettings()"><div class="modalCard"><h2>⚙️ <span data-i18n="settings">Settings</span></h2><p data-i18n="photoManage">এই অধ্যায়ের ছবিগুলো পরিচালনা করো।</p><button class="danger" onclick="deleteAllPhotos()">🗑️ <span data-i18n="deleteAll">এই অধ্যায়ের সব ছবি মুছুন</span></button><h3 data-i18n="language">🌐 Language</h3><div class="langRow"><button id="bnLang" onclick="setLanguage('bn')">বাংলা</button><button id="enLang" onclick="setLanguage('en')">English</button></div><div class="updateBox"><b>🔄 App Update</b><div id="updateStatus" class="updateStatus">নতুন version আছে কি না চেক করো।</div><button class="updateBtn" onclick="checkForUpdate(true)">Check for Update</button><button class="updateBtn secondary" onclick="saveUpdateUrl()">Set Update Link</button><button id="installUpdateBtn" class="updateBtn secondary" style="display:none" onclick="openLatestUpdate()">Update App</button><div class="updateVersion">Current version: v10 · মূল app offline-এ কাজ করে</div></div><button onclick="closeSettings()" data-i18n="close">বন্ধ করুন</button></div></div>
+<div id="viewer" class="viewer" onclick="if(event.target===this)closeViewer()"><img id="viewerImg" alt="ছবি"><div class="viewerTop"><button class="viewerSettings" onclick="toggleViewerMenu(event)">⚙️</button><button class="viewerClose" onclick="closeViewer()">✕</button></div><div id="viewerMenu" class="viewerMenu"><button onclick="deleteCurrentPhoto(event)">🗑️ এই ছবি মুছুন</button></div></div>
+<script>
+const curriculum={
+"পদার্থবিজ্ঞান":[["১ম পত্র",["ভৌত জগৎ ও পরিমাপ","ভেক্টর","গতিবিদ্যা","নিউটনীয় বলবিদ্যা","কাজ, শক্তি ও ক্ষমতা","মহাকর্ষ ও অভিকর্ষ","পদার্থের গাঠনিক ধর্ম","পর্যাবৃত্ত গতি","তরঙ্গ","আদর্শ গ্যাস ও গ্যাসের গতিতত্ত্ব"]],["২য় পত্র",["তাপগতিবিদ্যা","স্থির তড়িৎ","চল তড়িৎ","তড়িৎ প্রবাহের চৌম্বক ক্রিয়া ও চুম্বকত্ব","তাড়িতচৌম্বকীয় আবেশ ও পরিবর্তী তড়িৎ","জ্যামিতিক আলোকবিজ্ঞান","ভৌত আলোকবিজ্ঞান","আধুনিক পদার্থবিজ্ঞানের সূচনা","পরমাণুর মডেল ও নিউক্লিয়ার পদার্থবিজ্ঞান","সেমিকন্ডাক্টর ও ইলেকট্রনিক্স","জ্যোতির্বিজ্ঞান"]]],
+"জীববিজ্ঞান":[["১ম পত্র",["কোষ ও এর গঠন","কোষ বিভাজন","কোষ রসায়ন","অণুজীব","শৈবাল ও ছত্রাক","ব্রায়োফাইটা ও টেরিডোফাইটা","নগ্নবীজী ও আবৃতবীজী উদ্ভিদ","টিস্যু ও টিস্যুতন্ত্র","উদ্ভিদ শারীরতত্ত্ব","উদ্ভিদ প্রজনন","জীবপ্রযুক্তি","জীবের পরিবেশ, বিস্তার ও সংরক্ষণ"]],["২য় পত্র",["প্রাণীর বিভিন্নতা ও শ্রেণিবিন্যাস","প্রাণীর পরিচিতি","মানব শারীরতত্ত্ব: পরিপাক ও শোষণ","মানব শারীরতত্ত্ব: রক্ত ও সঞ্চালন","মানব শারীরতত্ত্ব: শ্বসন ও শ্বাসক্রিয়া","মানব শারীরতত্ত্ব: বর্জ্য ও নিষ্কাশন","মানব শারীরতত্ত্ব: চলন ও অঙ্গচালনা","মানব শারীরতত্ত্ব: সমন্বয় ও নিয়ন্ত্রণ","মানবজীবনের ধারাবাহিকতা","মানবদেহের প্রতিরক্ষা","জিনতত্ত্ব ও বিবর্তন","প্রাণীর আচরণ"]]],
+"রসায়ন":[["১ম পত্র",["ল্যাবরেটরির নিরাপদ ব্যবহার","গুণগত রসায়ন","মৌলের পর্যায়বৃত্ত ধর্ম ও রাসায়নিক বন্ধন","রাসায়নিক পরিবর্তন","কর্মমুখী রসায়ন"]],["২য় পত্র",["পরিবেশ রসায়ন","জৈব রসায়ন","পরিমাণগত রসায়ন","তড়িৎ রসায়ন","অর্থনৈতিক রসায়ন"]]],
+"উচ্চতর গণিত":[["১ম পত্র",["ম্যাট্রিক্স ও নির্ণায়ক","ভেক্টর","সরলরেখা","বৃত্ত","বিন্যাস ও সমাবেশ","ত্রিকোণমিতিক অনুপাত","সংযুক্ত কোণের ত্রিকোণমিতিক অনুপাত","ফাংশন ও ফাংশনের লেখচিত্র","অন্তরীকরণ","যোগজীকরণ"]],["২য় পত্র",["বাস্তব সংখ্যা ও অসমতা","যোগাশ্রয়ী প্রোগ্রাম","জটিল সংখ্যা","বহুপদী ও বহুপদী সমীকরণ","দ্বিপদী বিস্তৃতি","কনিক","বিপরীত ত্রিকোণমিতিক ফাংশন ও ত্রিকোণমিতিক সমীকরণ","স্থিতিবিদ্যা","সমতলে বস্তুকণার গতি","বিস্তার পরিমাপ ও সম্ভাবনা"]]],
+"বাংলা":[["১ম পত্র",["গদ্য পাঠ","কবিতা পাঠ","সহপাঠ: উপন্যাস","সহপাঠ: নাটক"]],["২য় পত্র",["বাংলা উচ্চারণ","বাংলা বানান","শব্দশ্রেণি","শব্দ গঠন","বাক্যতত্ত্ব","অপপ্রয়োগ ও শুদ্ধ প্রয়োগ","পারিভাষিক শব্দ ও অনুবাদ","দিনলিপি ও প্রতিবেদন","আবেদনপত্র ও পত্র","সারাংশ ও সারমর্ম","ভাবসম্প্রসারণ","রচনা"]]],
+"ইংরেজি":[["১ম পত্র",["Education and Life","Art and Craft","Myths of Power","Adolescence","Dreams","Relationships","People Who Stand Out","World Heritage","Travel and Tourism","Environmental Awareness","Nature and Nurture","Human Rights"]],["২য় পত্র",["Articles & Determiners","Prepositions","Right Form of Verbs","Subject-Verb Agreement","Transformation","Narration","Modifiers","Connectors","Punctuation","Paragraph","Email/Letter","Application","Report","Composition"]]],
+"আইসিটি":[["একাদশ-দ্বাদশ: এক পত্র",["তথ্য ও যোগাযোগ প্রযুক্তি: বিশ্ব ও বাংলাদেশ","কমিউনিকেশন সিস্টেমস ও নেটওয়ার্কিং","সংখ্যা পদ্ধতি ও ডিজিটাল ডিভাইস","ওয়েব ডিজাইন ও HTML","প্রোগ্রামিং ভাষা","ডেটাবেজ ম্যানেজমেন্ট সিস্টেম"]]]};
+const pages=document.querySelectorAll('.page');
+let navigatingBack=false;
+function show(id, fromBack=false){
+  pages.forEach(p=>p.classList.toggle('active',p.id===id));
+  scrollTo(0,0);
+  if(id==='planner') loadPlanner();
+  if(id==='home'){ updateProgress(); renderHomePlanner(); }
+  if(fromBack) return;
+
+  // প্রতিটি নতুন screen-এর আগে Home-এর একটি history entry রাখি।
+  // তাই ফোনের Back চাপলে Android/WebView প্রথমে Home-এ ফিরে আসবে।
+  if(id==='home'){
+    history.pushState({appPage:'home'},'', '#home');
+  }else{
+    history.pushState({appPage:'home'},'', '#home');
+    history.pushState({appPage:id},'', `#${id}`);
+  }
+}
+
+// শুরুতে Home-কে history-এর ভিত্তি হিসেবে রাখি
+history.replaceState({appPage:'home'},'', '#home');
+
+function goHomeFromBack(){
+  const active=document.querySelector('.page.active');
+  if(active && active.id!=='home'){
+    pages.forEach(p=>p.classList.toggle('active',p.id==='home'));
+    scrollTo(0,0);
+    history.replaceState({appPage:'home'},'', '#home');
+  }
+}
+
+window.addEventListener('popstate',()=>{
+  // Android phone Back / browser Back
+  goHomeFromBack();
+});
+window.addEventListener('hashchange',()=>{
+  // কিছু WebView popstate-এর বদলে hashchange দেয়
+  const active=document.querySelector('.page.active');
+  if(active && active.id!=='home') goHomeFromBack();
+});
+function openSubject(subject){show('papers');paperTitle.textContent=subject;paperList.innerHTML='';curriculum[subject].forEach(([paper,chs])=>{let w=document.createElement('div');w.className='paper';w.innerHTML=`<h2>${paper}</h2>`;chs.forEach((ch,i)=>{let b=document.createElement('button');b.className='chapter';b.innerHTML=`<span>অধ্যায় ${i+1}</span><b>${ch}</b><em>›</em>`;b.onclick=()=>openChapter(subject,paper,i+1,ch);w.appendChild(b)});paperList.appendChild(w)})}
+let currentPhotoKey='';
+function chapterKey(subject,paper,num){return `complete_${subject}_${paper}_${num}`}
+function isChapterComplete(subject,paper,num){return localStorage.getItem(chapterKey(subject,paper,num))==='1'}
+function updateCompleteButton(){const b=document.getElementById('completeChapterBtn');if(!b)return;const done=isChapterComplete(currentSubject,currentPaper,currentChapter);b.textContent=done?'☑ Completed':'☐ Mark as Complete';b.classList.toggle('done',done)}
+let currentSubject='',currentPaper='',currentChapter=0;
+function toggleChapterComplete(){if(!currentSubject)return;const k=chapterKey(currentSubject,currentPaper,currentChapter);localStorage.setItem(k,isChapterComplete(currentSubject,currentPaper,currentChapter)?'0':'1');updateCompleteButton();updateProgress()}
+function openChapter(subject,paper,num,title){show('editor');currentSubject=subject;currentPaper=paper;currentChapter=num;chapterTitle.textContent=`অধ্যায় ${num}: ${title}`;chapterSub.textContent=`${subject} • ${paper}`;const key=`note_${subject}_${paper}_${num}`;currentPhotoKey=`photos_${subject}_${paper}_${num}`;noteArea.value=localStorage.getItem(key)||'';saved.textContent=noteArea.value?'✓ Saved':'নিজের নোট লিখুন';noteArea.oninput=()=>{localStorage.setItem(key,noteArea.value);saved.textContent='✓ Saved'};updateCompleteButton();renderPhotos()}
+let currentViewerIndex=-1;
+function renderPhotos(){const gallery=document.getElementById('photoGallery');if(!gallery)return;gallery.innerHTML='';const photos=JSON.parse(localStorage.getItem(currentPhotoKey)||'[]');photos.forEach((item,i)=>{const src=typeof item==='string'?item:item.src||'';const caption=typeof item==='string'?'':(item.caption||'');const card=document.createElement('div');card.className='photoCard';card.innerHTML=`<img src="${src}" alt="অধ্যায়ের ছবি"><button class="gear" onclick="openPhotoSettings(event,${i})" aria-label="Photo settings">⚙️</button><textarea class="photoCaption" rows="2" placeholder="এই ছবির সাথে কিছু লিখুন..." aria-label="ছবির নোট">${caption}</textarea>`;card.querySelector('img').onclick=()=>openViewer(i);card.querySelector('.photoCaption').addEventListener('input',e=>{const arr=JSON.parse(localStorage.getItem(currentPhotoKey)||'[]');if(typeof arr[i]==='string')arr[i]={src:arr[i],caption:e.target.value};else arr[i].caption=e.target.value;localStorage.setItem(currentPhotoKey,JSON.stringify(arr));});gallery.appendChild(card)})}
+function openPhotoSettings(e,i){e.stopPropagation();currentViewerIndex=i;openViewer(i);setTimeout(()=>document.getElementById('viewerMenu').classList.add('show'),0)}
+function openViewer(i){const photos=JSON.parse(localStorage.getItem(currentPhotoKey)||'[]');if(!photos[i])return;currentViewerIndex=i;document.getElementById('viewerImg').src=typeof photos[i]==='string'?photos[i]:photos[i].src;document.getElementById('viewer').classList.add('show');document.getElementById('viewerMenu').classList.remove('show')}
+function closeViewer(){document.getElementById('viewer').classList.remove('show');document.getElementById('viewerMenu').classList.remove('show');currentViewerIndex=-1}
+function toggleViewerMenu(e){e.stopPropagation();document.getElementById('viewerMenu').classList.toggle('show')}
+function deleteCurrentPhoto(e){e.stopPropagation();if(currentViewerIndex<0)return;const photos=JSON.parse(localStorage.getItem(currentPhotoKey)||'[]');photos.splice(currentViewerIndex,1);localStorage.setItem(currentPhotoKey,JSON.stringify(photos));closeViewer();renderPhotos()}
+function openSettings(){document.getElementById('settingsModal').classList.add('show')}
+function closeSettings(){document.getElementById('settingsModal').classList.remove('show')}
+function deleteAllPhotos(){if(!currentPhotoKey){alert('আগে একটি অধ্যায় খুলুন।');return}const photos=JSON.parse(localStorage.getItem(currentPhotoKey)||'[]');if(!photos.length){alert('এই অধ্যায়ে কোনো ছবি নেই।');return}if(confirm('এই অধ্যায়ের সব ছবি মুছে ফেলবে?')){localStorage.removeItem(currentPhotoKey);renderPhotos();closeSettings()}}
+document.getElementById('photoInput').addEventListener('change',async(e)=>{const files=[...e.target.files];if(!files.length)return;const photos=JSON.parse(localStorage.getItem(currentPhotoKey)||'[]');for(const file of files){const data=await new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(file)});photos.push({src:data,caption:''})}try{localStorage.setItem(currentPhotoKey,JSON.stringify(photos));renderPhotos()}catch(err){alert('অনেক বড় ছবি হলে Save করা সম্ভব নাও হতে পারে। ছোট ছবি ব্যবহার করো।')}e.target.value=''});
+
+// Quick Notes: editable text + multiple images, stored locally.
+let quickPhotos = [];
+const quickTitle = document.getElementById('quickNoteTitle');
+const quickArea = document.getElementById('quickNoteArea');
+const quickSaved = document.getElementById('quickSaved');
+
+function saveQuickDraft(){
+  localStorage.setItem('studymate_quick_draft_title', quickTitle.value);
+  localStorage.setItem('studymate_quick_draft_text', quickArea.value);
+  quickSaved.textContent='✓ Saved';
+}
+quickTitle.addEventListener('input', saveQuickDraft);
+quickArea.addEventListener('input', saveQuickDraft);
+
+function renderQuickPhotos(){
+  const g=document.getElementById('quickPhotoGallery'); g.innerHTML='';
+  quickPhotos.forEach((src,i)=>{
+    const card=document.createElement('div'); card.className='photoCard';
+    card.innerHTML=`<img src="${src}" alt="Quick Note image"><button class="gear" onclick="removeQuickPhoto(${i})">✕</button>`;
+    card.querySelector('img').onclick=()=>{document.getElementById('viewerImg').src=src;document.getElementById('viewer').classList.add('show')};
+    g.appendChild(card);
+  });
+}
+function removeQuickPhoto(i){quickPhotos.splice(i,1);renderQuickPhotos();}
+document.getElementById('quickPhotoInput').addEventListener('change',async e=>{
+  for(const file of [...e.target.files]){
+    const data=await new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(file)});
+    quickPhotos.push(data);
+  }
+  renderQuickPhotos(); e.target.value='';
+});
+
+function saveQuickNote(){
+  const title=quickTitle.value.trim() || 'Quick Note';
+  const text=quickArea.value.trim();
+  if(!text && !quickPhotos.length){alert('আগে কিছু লিখুন বা ছবি যোগ করুন।');return;}
+  const arr=JSON.parse(localStorage.getItem('studymate_quick_notes')||'[]');
+  arr.unshift({title,text,photos:quickPhotos,date:new Date().toLocaleString()});
+  try{
+    localStorage.setItem('studymate_quick_notes',JSON.stringify(arr));
+    quickTitle.value=''; quickArea.value=''; quickPhotos=[]; renderQuickPhotos();
+    localStorage.removeItem('studymate_quick_draft_title'); localStorage.removeItem('studymate_quick_draft_text');
+    quickSaved.textContent='✓ Note saved';
+    renderQuickNotesList();
+  }catch(err){alert('ছবির ফাইল বড় হলে Save করা সম্ভব নাও হতে পারে। ছোট ছবি ব্যবহার করো।');}
+}
+function deleteQuickNote(i){
+  const arr=JSON.parse(localStorage.getItem('studymate_quick_notes')||'[]');
+  arr.splice(i,1);localStorage.setItem('studymate_quick_notes',JSON.stringify(arr));renderQuickNotesList();
+}
+function renderQuickNotesList(){
+  const box=document.getElementById('quickNotesList'); const arr=JSON.parse(localStorage.getItem('studymate_quick_notes')||'[]');
+  box.innerHTML=arr.map((n,i)=>`<div class="quickSavedCard"><h3>${escapeHtml(n.title)}</h3><p>${escapeHtml(n.text)}</p>${n.photos?.length?`<div class="miniPhotos">${n.photos.map(s=>`<img src="${s}" alt="note image">`).join('')}</div>`:''}<button class="danger" onclick="deleteQuickNote(${i})">🗑️ Delete</button></div>`).join('');
+}
+function escapeHtml(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));}
+quickTitle.value=localStorage.getItem('studymate_quick_draft_title')||'';
+quickArea.value=localStorage.getItem('studymate_quick_draft_text')||'';
+renderQuickNotesList();
+
+let questions=[{"q":"Ohm's law কোনটি?","o":["V=IR","P=VI²","F=ma","Q=mc"],"a":0},{"q":"AC-এর angular frequency-এর প্রতীক কোনটি?","o":["α","ω","λ","μ"],"a":1},{"q":"Faraday's law কোন রাশির পরিবর্তনের সাথে সম্পর্কিত?","o":["Magnetic flux","Resistance","Mass","Temperature"],"a":0},{"q":"তড়িৎচৌম্বকীয় আবেশে induced emf-এর একক কী?","o":["Volt","Ohm","Tesla","Weber"],"a":0},{"q":"Lenz's law কোন নীতির সাথে সামঞ্জস্যপূর্ণ?","o":["শক্তির সংরক্ষণ","ভরবেগের সংরক্ষণ","চার্জের সংরক্ষণ","ভর সংরক্ষণ"],"a":0},{"q":"রোধের SI একক কী?","o":["Volt","Ampere","Ohm","Watt"],"a":2},{"q":"ক্ষমতার SI একক কী?","o":["Joule","Watt","Newton","Coulomb"],"a":1},{"q":"চার্জের SI একক কী?","o":["Coulomb","Volt","Farad","Henry"],"a":0},{"q":"Current-এর SI একক কী?","o":["Ampere","Ohm","Tesla","Watt"],"a":0},{"q":"Capacitance-এর SI একক কী?","o":["Henry","Farad","Weber","Tesla"],"a":1},{"q":"তড়িৎ বিভবের SI একক কী?","o":["Volt","Joule","Coulomb","Ampere"],"a":0},{"q":"চৌম্বক ফ্লাক্সের SI একক কী?","o":["Tesla","Weber","Henry","Volt"],"a":1},{"q":"তাপগতিবিদ্যার প্রথম সূত্র কোন নীতির সাথে সম্পর্কিত?","o":["শক্তির সংরক্ষণ","ভর সংরক্ষণ","চার্জ সংরক্ষণ","ভরবেগ সংরক্ষণ"],"a":0},{"q":"Newton-এর দ্বিতীয় সূত্রের রূপ কোনটি?","o":["F=ma","V=IR","P=VI","E=mc²"],"a":0},{"q":"কাজের SI একক কী?","o":["Watt","Joule","Newton","Pascal"],"a":1},{"q":"ভেক্টরের কোন রাশি দিকসহ থাকে?","o":["Scalar","Vector","Constant","Unit"],"a":1},{"q":"বেগ কোন ধরনের রাশি?","o":["স্কেলার","ভেক্টর","মাত্রাহীন","ধ্রুবক"],"a":1},{"q":"মুক্তপতনে ত্বরণের প্রতীক সাধারণত কী?","o":["g","G","a₀","μ"],"a":0},{"q":"কম্পাঙ্কের SI একক কী?","o":["Hertz","Second","Radian","Meter"],"a":0},{"q":"তরঙ্গদৈর্ঘ্যের SI একক কী?","o":["Meter","Hertz","Second","Newton"],"a":0},{"q":"জীববিজ্ঞানে কোষের powerhouse বলা হয় কোন অঙ্গাণুকে?","o":["Ribosome","Mitochondria","Golgi body","Nucleus"],"a":1},{"q":"DNA-এর পূর্ণরূপ কোনটি?","o":["Deoxyribonucleic acid","Dinitrogen acid","Dynamic nucleic acid","Deoxygenated nucleic acid"],"a":0},{"q":"RNA-এর পূর্ণরূপ কোনটি?","o":["Ribonucleic acid","Reactive nucleic acid","Ribose nitrogen acid","Reduced nucleic acid"],"a":0},{"q":"কোষ বিভাজনের কোন ধাপে chromosome equator-এ সাজে?","o":["Prophase","Metaphase","Anaphase","Telophase"],"a":1},{"q":"উদ্ভিদের সবুজ রঞ্জক কোনটি?","o":["Hemoglobin","Chlorophyll","Melanin","Keratin"],"a":1},{"q":"Photosynthesis-এ প্রধানত কোন গ্যাস ব্যবহৃত হয়?","o":["O₂","CO₂","N₂","H₂"],"a":1},{"q":"মানবদেহে রক্ত সঞ্চালনের প্রধান অঙ্গ কোনটি?","o":["ফুসফুস","হৃদপিণ্ড","কিডনি","যকৃত"],"a":1},{"q":"হিমোগ্লোবিন কোথায় থাকে?","o":["শ্বেত রক্তকণিকা","লোহিত রক্তকণিকা","প্লেটলেট","প্লাজমা"],"a":1},{"q":"মানবদেহের স্বাভাবিক জিনগত উপাদানের প্রধান বাহক কোনটি?","o":["DNA","Starch","Lipid","Cellulose"],"a":0},{"q":"কোষের নিয়ন্ত্রণকেন্দ্র কোনটি?","o":["Ribosome","Nucleus","Vacuole","Lysosome"],"a":1},{"q":"রসায়নে pH=7 সাধারণত কী নির্দেশ করে?","o":["অম্লীয়","ক্ষারীয়","নিরপেক্ষ","লবণাক্ত"],"a":2},{"q":"পানির রাসায়নিক সংকেত কোনটি?","o":["CO₂","H₂O","O₂","NaCl"],"a":1},{"q":"সোডিয়াম ক্লোরাইডের সংকেত কী?","o":["NaOH","NaCl","HCl","KCl"],"a":1},{"q":"অক্সিজেনের পারমাণবিক সংখ্যা কত?","o":["6","7","8","9"],"a":2},{"q":"কার্বনের পারমাণবিক সংখ্যা কত?","o":["6","8","12","14"],"a":0},{"q":"অম্লের pH সাধারণত কেমন?","o":["7-এর কম","7-এর বেশি","সবসময় 7","0-এর বেশি নয়"],"a":0},{"q":"ক্ষারের pH সাধারণত কেমন?","o":["7-এর কম","7-এর বেশি","সবসময় 7","সবসময় 0"],"a":1},{"q":"Avogadro সংখ্যার কাছাকাছি মান কোনটি?","o":["6.022×10²³","9.8","3×10⁸","1.6×10⁻¹⁹"],"a":0},{"q":"Catalyst কী করে?","o":["সক্রিয়ণ শক্তি পরিবর্তন করে বিক্রিয়ার হার প্রভাবিত করে","ভর সৃষ্টি করে","পরমাণু ধ্বংস করে","সবসময় তাপমাত্রা কমায়"],"a":0},{"q":"উচ্চতর গণিতে determinant কোন ধারণার সাথে যুক্ত?","o":["Matrix","Paragraph","Molecule","Cell"],"a":0},{"q":"2×3 ম্যাট্রিক্সে মোট element কতটি?","o":["5","6","8","9"],"a":1},{"q":"ত্রিভুজের তিন কোণের সমষ্টি কত?","o":["90°","180°","270°","360°"],"a":1},{"q":"sin 90° এর মান কত?","o":["0","1/2","1","√3/2"],"a":2},{"q":"cos 0° এর মান কত?","o":["0","1","-1","1/2"],"a":1},{"q":"log₁₀ 100 এর মান কত?","o":["1","2","10","100"],"a":1},{"q":"x²-এর অন্তরক কত?","o":["x","2x","x²","2"],"a":1},{"q":"∫1 dx এর ফল কী?","o":["1","x+C","0","x²"],"a":1},{"q":"বাংলা ভাষার বর্ণমালার দুই প্রধান ভাগ কী?","o":["স্বরবর্ণ ও ব্যঞ্জনবর্ণ","গদ্য ও পদ্য","বিশেষ্য ও সর্বনাম","কারক ও বিভক্তি"],"a":0},{"q":"বাংলা সাহিত্যে 'পদ্য' বলতে কী বোঝায়?","o":["কবিতা","চিঠি","প্রতিবেদন","ব্যাকরণ"],"a":0},{"q":"English-এ noun কী?","o":["Naming word","Action word","Describing word","Joining word"],"a":0},{"q":"Past tense সাধারণত কী বোঝায়?","o":["অতীতের কাজ","বর্তমানের কাজ","ভবিষ্যতের কাজ","শুধু অভ্যাস"],"a":0},{"q":"HTML-এর পূর্ণরূপ কী?","o":["HyperText Markup Language","HighText Machine Language","Hyperlink Text Management Language","Home Tool Markup Language"],"a":0},{"q":"CPU-এর পূর্ণরূপ কী?","o":["Central Processing Unit","Computer Primary Unit","Central Program Utility","Core Processing User"],"a":0},{"q":"Binary number system-এর base কত?","o":["2","8","10","16"],"a":0},{"q":"ICT-তে database কী কাজে ব্যবহৃত হয়?","o":["তথ্য সংগঠিত ও সংরক্ষণ","শুধু ছবি আঁকা","শুধু গান শোনা","শুধু টাইপ করা"],"a":0}],qi=0,score=Number(localStorage.getItem("score")||0),answered=false;function shuffleQuestions(){for(let i=questions.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[questions[i],questions[j]]=[questions[j],questions[i]]}} function loadQ(){let x=questions[qi];q.textContent=`${qi+1}. ${x.q}`;opts.innerHTML='';questions[qi].o.forEach((v,i)=>{let b=document.createElement('button');b.className='option';b.textContent=v;b.onclick=()=>answer(i,b);opts.appendChild(b)});result.textContent='';answered=false}function answer(i,b){if(answered)return;answered=true;let x=questions[qi];opts.children[x.a].classList.add('correct');if(i===x.a)score++;else b.classList.add('wrong');quizScore.textContent=score;localStorage.setItem('score',score)}function nextQ(){qi=(qi+1)%questions.length;if(qi===0)shuffleQuestions();loadQ()}
+let sec=1500,timer=null;function render(){clock.textContent=`${String(Math.floor(sec/60)).padStart(2,'0')}:${String(sec%60).padStart(2,'0')}`}function startTimer(){if(timer)return;timer=setInterval(()=>{if(sec>0){sec--;render()}else{clearInterval(timer);timer=null;alert('Study session complete! 🎉')}},1000)}function pauseTimer(){clearInterval(timer);timer=null}function resetTimer(){pauseTimer();sec=1500;render()}theme.onclick=()=>document.body.classList.toggle('dark');quizScore.textContent=localStorage.getItem('score')||0;loadQ();render();
+
+
+
+function allChapterCount(){
+  let n=0; Object.values(curriculum).forEach(ps=>ps.forEach(([p,chs])=>n+=chs.length)); return n;
+}
+function completedChapterCount(){
+  let n=0; Object.values(curriculum).forEach(ps=>ps.forEach(([p,chs])=>chs.forEach((_,i)=>{
+    // subject is not available here; count by scanning localStorage keys instead
+  })));
+  return Object.keys(localStorage).filter(k=>k.startsWith('complete_') && localStorage.getItem(k)==='1').length;
+}
+function updateProgress(){
+  const total=allChapterCount(), done=completedChapterCount(), pct=total?Math.round(done*100/total):0;
+  const c=document.getElementById('completedCount'), f=document.getElementById('progressFill'), tx=document.getElementById('progressText');
+  if(c)c.textContent=done;if(f)f.style.width=pct+'%';if(tx)tx.textContent=`${pct}% completed • ${done}/${total} chapters`;
+}
+function localDateKey(d=new Date()){
+  const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,'0'),day=String(d.getDate()).padStart(2,'0');
+  return `${y}-${m}-${day}`;
+}
+function plannerStore(){return JSON.parse(localStorage.getItem('studymate_planner_v2')||'{}')}
+function savePlannerStore(store){localStorage.setItem('studymate_planner_v2',JSON.stringify(store))}
+function migratePlanner(){
+  const existing=localStorage.getItem('studymate_planner_v2');
+  if(existing)return;
+  const old=JSON.parse(localStorage.getItem('studymate_planner')||'[]');
+  const store={};
+  if(Array.isArray(old)&&old.length)store[localDateKey()]=old.map(x=>({text:x.text||'',done:!!x.done}));
+  savePlannerStore(store);
+}
+let selectedPlannerDate=localDateKey();
+function formatPlannerDate(key){
+  const d=new Date(key+'T00:00:00');
+  if(Number.isNaN(d.getTime()))return key;
+  return d.toLocaleDateString('bn-BD',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+}
+function loadPlanner(){
+  migratePlanner();
+  const dateInput=document.getElementById('plannerDate');
+  if(dateInput && !dateInput.value)dateInput.value=selectedPlannerDate;
+  if(dateInput && dateInput.value)selectedPlannerDate=dateInput.value;
+  const day=document.getElementById('plannerDay'); if(day)day.textContent=formatPlannerDate(selectedPlannerDate);
+  const store=plannerStore(), arr=store[selectedPlannerDate]||[], box=document.getElementById('plannerList'); if(!box)return;
+  box.innerHTML='';
+  if(!arr.length)box.innerHTML='<p class="emptyPlan">এই তারিখের জন্য এখনো কোনো task যোগ করা হয়নি।</p>';
+  arr.forEach((x,i)=>{
+    const row=document.createElement('div');row.className='plannerItem';
+    row.innerHTML=`<input type="checkbox" ${x.done?'checked':''}><input type="text" value="${escapeHtml(x.text)}" placeholder="কী পড়বে? (যেমন: Physics Chapter 5)"><button class="danger">✕</button>`;
+    const ins=row.querySelectorAll('input');
+    ins[0].onchange=()=>{const st=plannerStore();st[selectedPlannerDate][i].done=ins[0].checked;savePlannerStore(st);renderHomePlanner()};
+    ins[1].oninput=()=>{const st=plannerStore();st[selectedPlannerDate][i].text=ins[1].value;savePlannerStore(st);renderHomePlanner()};
+    row.querySelector('button').onclick=()=>{const st=plannerStore();st[selectedPlannerDate].splice(i,1);if(!st[selectedPlannerDate].length)delete st[selectedPlannerDate];savePlannerStore(st);loadPlanner();renderHomePlanner()};
+    box.appendChild(row);
+  });
+}
+function changePlannerDate(value){selectedPlannerDate=value||localDateKey();loadPlanner()}
+function addPlannerItem(){
+  migratePlanner(); const st=plannerStore(); if(!st[selectedPlannerDate])st[selectedPlannerDate]=[];
+  st[selectedPlannerDate].push({text:'',done:false}); savePlannerStore(st); loadPlanner();
+  setTimeout(()=>{const inputs=document.querySelectorAll('#plannerList input[type=text]');if(inputs.length)inputs[inputs.length-1].focus()},50);
+}
+function clearPlanner(){
+  if(confirm('এই তারিখের সব task মুছে ফেলবে?')){const st=plannerStore();delete st[selectedPlannerDate];savePlannerStore(st);loadPlanner();renderHomePlanner()}
+}
+function renderHomePlanner(){
+  migratePlanner(); const box=document.getElementById('homePlannerList');if(!box)return;
+  const today=localDateKey(), st=plannerStore(), arr=st[today]||[]; box.innerHTML='';
+  if(!arr.length){box.innerHTML='<div class="emptyPlan">আজকের জন্য কোনো task নেই। Daily Planner থেকে যোগ করো।</div>';return;}
+  arr.forEach((x,i)=>{
+    const row=document.createElement('label');row.className='todayTask'+(x.done?' done':'');
+    row.innerHTML=`<input type="checkbox" ${x.done?'checked':''}><span>${escapeHtml(x.text||'নাম দেওয়া হয়নি')}</span>`;
+    row.querySelector('input').onchange=()=>{const s=plannerStore();s[today][i].done=row.querySelector('input').checked;savePlannerStore(s);renderHomePlanner();loadPlanner()};
+    box.appendChild(row);
+  });
+}
+function exportBackup(){
+  const data={version:8,exportedAt:new Date().toISOString(),localStorage:Object.fromEntries(Object.keys(localStorage).map(k=>[k,localStorage.getItem(k)]))};
+  const blob=new Blob([JSON.stringify(data)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='StudyMate-Backup.json';a.click();URL.revokeObjectURL(a.href);
+}
+function importBackup(e){
+  const file=e.target.files[0];if(!file)return;const r=new FileReader();
+  r.onload=()=>{try{const data=JSON.parse(r.result);if(!data.localStorage)throw 0;if(!confirm('বর্তমান app data-এর সাথে backup data restore করবে?'))return;Object.entries(data.localStorage).forEach(([k,v])=>localStorage.setItem(k,v));alert('Backup restore হয়েছে। App reload হবে।');location.reload()}catch(err){alert('Backup file সঠিক নয়।')}};r.readAsText(file);e.target.value='';
+}
+migratePlanner();loadPlanner();updateProgress();renderHomePlanner();
+
+/* ===== StudyMate Online Update System =====
+   Android cannot silently install a new APK for security reasons.
+   This system checks a small online JSON file and shows an Update button.
+   Put your latest APK URL + version in that JSON.
+*/
+const APP_VERSION = 9;
+const UPDATE_CONFIG_URL = localStorage.getItem('studymate_update_url') ||
+  'https://raw.githubusercontent.com/YOUR-USERNAME/YOUR-REPO/main/studymate-update.json';
+let latestUpdateData = null;
+
+function setUpdateStatus(msg){
+  const el=document.getElementById('updateStatus');
+  if(el)el.textContent=msg;
+}
+async function checkForUpdate(showMessage=false){
+  const btn=document.getElementById('installUpdateBtn');
+  if(btn)btn.style.display='none';
+
+  // Offline-first: never interrupt the app when there is no internet.
+  if(!navigator.onLine){
+    if(showMessage)setUpdateStatus('Offline mode — update check করা হয়নি।');
+    return;
+  }
+
+  if(showMessage)setUpdateStatus('Checking for update…');
+  try{
+    const controller = new AbortController();
+    const timer = setTimeout(()=>controller.abort(),5000);
+    const res=await fetch(UPDATE_CONFIG_URL+'?t='+Date.now(),{
+      cache:'no-store',
+      signal:controller.signal
+    });
+    clearTimeout(timer);
+    if(!res.ok)throw new Error('HTTP '+res.status);
+    const data=await res.json();
+    if(!data.version || !data.apkUrl)throw new Error('Invalid update file');
+    latestUpdateData=data;
+    const remoteVersion=Number(String(data.version).replace(/^v/i,''))||0;
+    if(remoteVersion>APP_VERSION){
+      setUpdateStatus(`নতুন version v${remoteVersion} পাওয়া গেছে${data.notes?' — '+data.notes:''}`);
+      if(btn)btn.style.display='inline-block';
+    }else{
+      setUpdateStatus('তুমি সর্বশেষ version ব্যবহার করছো।');
+    }
+  }catch(e){
+    if(showMessage)setUpdateStatus('Update check করা যায়নি। Offline mode-এ app স্বাভাবিকভাবে চলবে।');
+  }
+}
+function openLatestUpdate(){
+  if(!latestUpdateData?.apkUrl)return;
+  window.open(latestUpdateData.apkUrl,'_blank');
+}
+window.addEventListener('offline',()=>{
+  const b=document.getElementById('installUpdateBtn');
+  if(b)b.style.display='none';
+});
+window.addEventListener('online',()=>{
+  // Only check when the user is online; failure never blocks the app.
+  checkForUpdate(false);
+});
+
+function saveUpdateUrl(){
+  const u=prompt('তোমার online update JSON-এর URL দাও:', UPDATE_CONFIG_URL);
+  if(u && /^https?:\/\//i.test(u)){
+    localStorage.setItem('studymate_update_url',u.trim());
+    setUpdateStatus('Update link saved. এখন Check for Update চাপো।');
+  }
+}
+const i18n={
+bn:{settings:"Settings",photoManage:"এই অধ্যায়ের ছবিগুলো পরিচালনা করো।",deleteAll:"এই অধ্যায়ের সব ছবি মুছুন",language:"🌐 Language",close:"বন্ধ করুন",subjects:"Subjects",quiz:"MCQ Quiz",timer:"Study Timer",notes:"Quick Notes",home:"Home",quickStudy:"Quick Study",study:"আজ কী পড়বে? 👋",desc:"বাংলাদেশ HSC পড়াশোনার জন্য তোমার নিজের StudyMate.",minutes:"মিনিট পড়া",completed:"সম্পন্ন"},
+en:{settings:"Settings",photoManage:"Manage photos for this chapter.",deleteAll:"Delete all photos in this chapter",language:"🌐 Language",close:"Close",subjects:"Subjects",quiz:"MCQ Quiz",timer:"Study Timer",notes:"Quick Notes",home:"Home",quickStudy:"Quick Study",study:"What will you study today? 👋",desc:"Your own StudyMate for Bangladesh HSC studies.",minutes:"Minutes studied",completed:"Completed"}
+};
+function setLanguage(lang){
+ localStorage.setItem("studymate_language",lang);
+ document.documentElement.lang=lang==="en"?"en":"bn";
+ document.querySelectorAll("[data-i18n]").forEach(el=>{const k=el.getAttribute("data-i18n");if(i18n[lang][k]!==undefined)el.textContent=i18n[lang][k]});
+ document.getElementById("bnLang").classList.toggle("active",lang==="bn");
+ document.getElementById("enLang").classList.toggle("active",lang==="en");
+}
+
+setLanguage(localStorage.getItem("studymate_language")||"bn");
+</script></body></html>
